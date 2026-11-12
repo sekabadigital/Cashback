@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Sekaba Affiliate Shopee</title>
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#ee4d2d">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    <style>
+        :root {
+            --bg: #f5f6f8;
+            --sf: #fff;
+            --tx: #1a1e23;
+            --mu: #5c6672;
+            --bd: #dfe3e8;
+            --ac: #ee4d2d;
+            --on: #fff;
+            --ok: #0f7a58;
+            --wn: #a85a06;
+            --bad: #bf242b;
+            box-sizing: border-box;
+            padding-top: env(safe-area-inset-top, 0px);
+            padding-bottom: env(safe-area-inset-bottom, 0px)
+        }
+
+        @media (prefers-color-scheme:dark) {
+            :root:not([data-theme="light"]) {
+                --bg: #121518;
+                --sf: #1b1f24;
+                --tx: #eceff2;
+                --mu: #9aa5b1;
+                --bd: #2c333b;
+                --ac: #ff6a4d;
+                --on: #1a0d09;
+                --ok: #3ecf9a;
+                --wn: #f0a04b;
+                --bad: #ff7b80;
+                color-scheme: dark
+            }
+        }
+
+        :root[data-theme="dark"] {
+            --bg: #121518;
+            --sf: #1b1f24;
+            --tx: #eceff2;
+            --mu: #9aa5b1;
+            --bd: #2c333b;
+            --ac: #ff6a4d;
+            --on: #1a0d09;
+            --ok: #3ecf9a;
+            --wn: #f0a04b;
+            --bad: #ff7b80;
+            color-scheme: dark
+        }
+
+        html {
+            scroll-padding-top: env(safe-area-inset-top, 0px)
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: inherit
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--tx);
+            font: 15px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif
+        }
+
+        #app {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 14px 14px 40px
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 0 14px
+        }
+
+        header b {
+            font-size: 17px
+        }
+
+        header span {
+            color: var(--mu);
+            flex: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis
+        }
+
+        .card {
+            background: var(--sf);
+            border: 1px solid var(--bd);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px
+        }
+
+        h2 {
+            font-size: 15px;
+            margin: 0 0 10px
+        }
+
+        .mu {
+            color: var(--mu);
+            font-size: 13px
+        }
+
+        .big {
+            font-size: 34px;
+            font-weight: 700;
+            color: var(--ok);
+            letter-spacing: -.5px;
+            line-height: 1.15
+        }
+
+        .row {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 10px
+        }
+
+        .row div {
+            min-width: 110px
+        }
+
+        .row b {
+            display: block;
+            font-size: 16px
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            color: var(--mu);
+            margin: 10px 0 4px
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            font: inherit;
+            color: var(--tx);
+            background: var(--bg);
+            border: 1px solid var(--bd);
+            border-radius: 8px;
+            padding: 10px
+        }
+
+        textarea {
+            min-height: 120px;
+            font-family: ui-monospace, Menlo, monospace;
+            font-size: 13px
+        }
+
+        input:focus-visible,
+        textarea:focus-visible,
+        button:focus-visible {
+            outline: 2px solid var(--ac);
+            outline-offset: 1px
+        }
+
+        button {
+            font: inherit;
+            font-weight: 600;
+            border: 0;
+            border-radius: 8px;
+            padding: 10px 14px;
+            background: var(--ac);
+            color: var(--on);
+            cursor: pointer;
+            margin-top: 12px
+        }
+
+        button.ghost {
+            background: transparent;
+            color: var(--tx);
+            border: 1px solid var(--bd);
+            margin: 0;
+            padding: 6px 10px
+        }
+
+        button.sm {
+            padding: 5px 9px;
+            margin: 0 4px 0 0;
+            font-size: 13px
+        }
+
+        button.no {
+            background: transparent;
+            color: var(--bad);
+            border: 1px solid var(--bad)
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--ac);
+            color: var(--on);
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 8px;
+            padding: 10px 14px
+        }
+
+        .tabs {
+            display: flex;
+            gap: 6px;
+            overflow-x: auto;
+            margin-bottom: 12px
+        }
+
+        .tabs button {
+            margin: 0;
+            background: var(--sf);
+            color: var(--tx);
+            border: 1px solid var(--bd);
+            white-space: nowrap
+        }
+
+        .tabs button.on {
+            background: var(--ac);
+            color: var(--on);
+            border-color: var(--ac)
+        }
+
+        .tw {
+            overflow-x: auto
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 8px 6px;
+            border-bottom: 1px solid var(--bd);
+            white-space: nowrap
+        }
+
+        th {
+            color: var(--mu);
+            font-weight: 500;
+            font-size: 13px
+        }
+
+        .b {
+            padding: 2px 8px;
+            border-radius: 99px;
+            border: 1px solid currentColor;
+            font-size: 12px
+        }
+
+        .b-ok {
+            color: var(--ok)
+        }
+
+        .b-wn {
+            color: var(--wn)
+        }
+
+        .b-bad {
+            color: var(--bad)
+        }
+
+        .msg {
+            border-left: 3px solid var(--ac);
+            background: var(--sf);
+            padding: 10px 12px;
+            border-radius: 8px;
+            margin-bottom: 12px
+        }
+
+        .two {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px
+        }
+
+        .empty {
+            color: var(--mu);
+            padding: 8px 0
+        }
+
+        .hero {
+            padding: 20px 2px 4px
+        }
+
+        .hero h1 {
+            font-size: 30px;
+            line-height: 1.12;
+            margin: 0 0 8px;
+            letter-spacing: -.6px
+        }
+
+        .steps {
+            display: grid;
+            gap: 12px;
+            margin: 16px 0;
+            padding: 0;
+            list-style: none;
+            counter-reset: s
+        }
+
+        .steps li {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            counter-increment: s
+        }
+
+        .steps li::before {
+            content: counter(s);
+            flex: none;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: var(--ac);
+            color: var(--on);
+            font-weight: 700;
+            display: grid;
+            place-items: center;
+            font-size: 14px
+        }
+
+        .inst {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            background: var(--sf);
+            border: 1px dashed var(--ac);
+            border-radius: 12px;
+            padding: 12px 14px;
+            margin-bottom: 12px
+        }
+
+        .inst button {
+            margin: 0;
+            flex: none
+        }
+
+        .paste {
+            font-size: 16px;
+            padding: 14px;
+            margin-bottom: 2px
+        }
+
+        .nav {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            gap: 4px;
+            background: var(--sf);
+            border-top: 1px solid var(--bd);
+            padding: 6px 8px calc(6px + env(safe-area-inset-bottom, 0px))
+        }
+
+        .nav button {
+            flex: 1;
+            background: transparent;
+            color: var(--mu);
+            margin: 0;
+            padding: 9px 4px;
+            font-size: 13px
+        }
+
+        .nav button.on {
+            color: var(--ac);
+            background: var(--bg)
+        }
+
+        .link {
+            background: none;
+            color: var(--mu);
+            text-decoration: underline;
+            padding: 0;
+            margin: 12px 0 0;
+            font-weight: 400
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+    <script>
+        const SB_URL = 'sb_publishable_owWQgkgJSCE5p5iFKkUpQg_wZkVGAQC', SB_KEY = 'sb_secret_C4nnsYam2Sqt8651WoNwdQ_Kv7L0CcT';
+        const ok = !SB_URL.startsWith('ISI');
+        let sb = null, S = { cfg: { pct: 50, aff: '', min: 50000 }, users: [], orders: [], wd: [], clicks: [], prof: null }, ut = 'belanja', tab = 'ringkas', am = 'login', msg = '', lastLink = '', lastUrl = '', lastName = '', dp = null;
+        const $ = s => document.querySelector(s);
+        const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+        const rp = n => 'Rp' + Math.round(n).toLocaleString('id-ID');
+        const val = id => { const e = document.getElementById(id); return e ? e.value.trim() : '' };
+        const bdg = s => `<span class="b ${{ cair: 'b-ok', dibayar: 'b-ok', pending: 'b-wn', menunggu: 'b-wn', batal: 'b-bad', ditolak: 'b-bad' }[s] || ''}">${esc(s)}</span>`;
+
+
+        function stats(p) {
+            let pe = 0, c = 0; S.orders.forEach(o => { if (o.sub !== p.sub) return; if (o.st === 'pending') pe += o.share; if (o.st === 'cair') c += o.share });
+            const w = S.wd.filter(x => x.uid === p.id && x.st !== 'ditolak').reduce((t, x) => t + x.amt, 0); return { p: pe, c, w, av: c - w }
+        }
+        const uname = id => (S.users.find(u => u.id === id) || { name: '?' }).name;
+        async function refresh() {
+            const { data: { session } } = await sb.auth.getSession(); if (!session) { S.prof = null; return }
+            const { data: p, error: pe } = await sb.from('profiles').select('*').eq('id', session.user.id).single(); if (pe) throw pe; S.prof = p;
+            const c = (await sb.from('settings').select('*').single()).data; if (c) S.cfg = { pct: +c.pct, aff: c.aff_id || '', min: +c.min_wd };
+            const [o, w, k] = await Promise.all([sb.from('orders').select('*').order('updated_at'), sb.from('withdrawals').select('*').order('created_at'), sb.from('clicks').select('user_id')]);
+            S.orders = (o.data || []).map(x => ({ oid: x.oid, sub: x.sub, k: +x.komisi, share: +x.share, st: x.status }));
+            S.wd = (w.data || []).map(x => ({ id: x.id, uid: x.user_id, amt: +x.amount, dst: x.dest, st: x.status, ts: x.created_at }));
+            S.clicks = k.data || [];
+            S.users = p.role === 'admin' ? ((await sb.from('profiles').select('*').order('created_at')).data || []) : [p]
+        }
+        const hdr = t => `<header><b>Sekaba Affiliate</b><span>${esc(t)}</span><button class="ghost" data-a="out">Keluar</button></header>`;
+        function render() {
+            const a = $('#app'); if (!ok) { a.innerHTML = '<div class="card"><h2>Belum terhubung</h2><p class="mu">Isi SB_URL dan SB_KEY di bagian atas script index.html dengan data proyek Supabase Anda.</p></div>'; return }
+            const p = S.prof; const h = !p ? loginV() : p.role === 'admin' ? hdr('Admin') + adminV() : hdr(p.name) + userV();
+            a.innerHTML = (msg ? `<div class="msg">${esc(msg)}</div>` : '') + h; msg = ''
+        }
+        const standalone = () => matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+        const mark = () => { try { localStorage.setItem('sekaba_inst', '1') } catch (e) { } };
+        const installed = () => { try { return standalone() || localStorage.getItem('sekaba_inst') === '1' } catch (e) { return standalone() } };
+        addEventListener('beforeinstallprompt', e => { e.preventDefault(); dp = e; render() });
+        addEventListener('appinstalled', () => { dp = null; mark(); render() });
+        const instBox = () => installed() ? '' : `<div class="inst"><div><b>Pasang di layar utama</b><div class="mu">Buka seperti aplikasi, tanpa browser.</div></div><button data-a="inst">Pasang</button></div>`;
+        function inst() {
+            if (dp) { const p = dp; dp = null; p.prompt(); p.userChoice.then(c => { if (c.outcome === 'accepted') mark(); render() }); return }
+            msg = /iphone|ipad|ipod/i.test(navigator.userAgent) ? 'Di iPhone: ketuk ikon Bagikan di Safari, lalu pilih Tambahkan ke Layar Utama.' : 'Buka menu browser (titik tiga), lalu pilih Pasang aplikasi atau Tambahkan ke layar utama.'; render()
+        }
+
+        const steps = () => `<ol class="steps"><li><div><b>Tempel link produk</b><div class="mu">Salin dari aplikasi Shopee.</div></div></li><li><div><b>Belanja lewat tombol kami</b><div class="mu">Anda diarahkan ke Shopee.</div></div></li><li><div><b>Cashback masuk saldo</b><div class="mu">Setelah pesanan selesai.</div></div></li></ol>`;
+        function loginV() {
+            const d = am === 'daftar'; return `<div class="hero"><h1>Belanja di Shopee, dapat cashback</h1><p class="mu">Harga di Shopee tetap sama. Sebagian komisi kami kembalikan ke Anda.</p></div>${steps()}${instBox()}
+<div class="card"><h2>${d ? 'Daftar' : 'Masuk'}</h2>${d ? '<label for="nm">Nama</label><input id="nm" autocomplete="name">' : ''}<label for="em">Email</label><input id="em" type="email" autocomplete="email"><label for="pw">Kata sandi</label><input id="pw" type="password" autocomplete="${d ? 'new-password' : 'current-password'}"><button data-a="${d ? 'daftar' : 'login'}">${d ? 'Daftar' : 'Masuk'}</button></div>
+<button class="link" data-a="am" data-v="${d ? 'login' : 'daftar'}">${d ? 'Sudah punya akun? Masuk' : 'Belum punya akun? Daftar'}</button>`
+        }
+        function userV() {
+            const p = S.prof, s = stats(p), os = S.orders.slice().reverse(), ws = S.wd.filter(x => x.uid === p.id).reverse();
+            const bal = `<div class="card"><div class="mu">Saldo cashback tersedia</div><div class="big">${rp(s.av)}</div><div class="mu">Pending ${rp(s.p)}, menunggu pesanan divalidasi</div></div>`; let b;
+            if (ut === 'belanja') b = bal + instBox() + `<div class="card"><h2>Mau beli apa hari ini?</h2><input class="paste" id="url" inputmode="url" placeholder="Tempel link produk Shopee" value="${esc(lastUrl)}"><button data-a="gen">Tampilkan produk</button>` + (lastLink ? `<div class="card" style="margin:14px 0 0;background:var(--bg)"><div class="mu">Produk</div><b>${esc(lastName)}</b><p class="mu">Cashback ${S.cfg.pct}% dari komisi Shopee, cair setelah pesanan selesai.</p><a class="btn" style="display:block;text-align:center" href="${esc(lastLink)}" target="_blank" rel="noopener">Belanja di Shopee</a><p class="mu">Belanja lewat tombol ini saja agar cashback tercatat.</p></div>` : '') + `</div>` + (lastLink ? '' : steps());
+            else if (ut === 'pesanan') b = bal + `<div class="card"><h2>Pesanan Anda</h2>${os.length ? `<div class="tw"><table><tr><th>Pesanan</th><th>Cashback</th><th>Status</th></tr>${os.map(o => `<tr><td>${esc(o.oid)}</td><td>${rp(o.share)}</td><td>${bdg(o.st)}</td></tr>`).join('')}</table></div>` : '<div class="empty">Belum ada pesanan. Mulai dari tab Belanja.</div>'}</div>`;
+            else b = bal + `<div class="card"><h2>Tarik saldo</h2><p class="mu">Minimal ${rp(S.cfg.min)}. Dibayar manual oleh admin. Tujuan terakhir tersimpan otomatis.</p><label for="amt">Jumlah (Rp)</label><input id="amt" inputmode="numeric"><label for="dst">Bank atau e-wallet dan nomor</label><input id="dst" value="${esc(p.payout || '')}" placeholder="DANA 0812..."><button data-a="wd">Ajukan penarikan</button></div>
+<div class="card"><h2>Riwayat penarikan</h2>${ws.length ? `<div class="tw"><table><tr><th>Tanggal</th><th>Jumlah</th><th>Tujuan</th><th>Status</th></tr>${ws.map(x => `<tr><td>${new Date(x.ts).toLocaleDateString('id-ID')}</td><td>${rp(x.amt)}</td><td>${esc(x.dst)}</td><td>${bdg(x.st)}</td></tr>`).join('')}</table></div>` : '<div class="empty">Belum ada penarikan.</div>'}</div>`;
+            return b + `<div style="height:72px"></div><nav class="nav">${[['belanja', '🛍️ Belanja'], ['pesanan', '📦 Pesanan'], ['tarik', '💰 Tarik']].map(t => `<button class="${ut === t[0] ? 'on' : ''}" data-a="ut" data-v="${t[0]}">${t[1]}</button>`).join('')}</nav>`
+        }
+        function adminV() {
+            const T = [['ringkas', 'Ringkasan'], ['impor', 'Impor CSV'], ['wd', 'Penarikan'], ['user', 'Pengguna']];
+            return `<div class="tabs">${T.map(t => `<button class="${tab === t[0] ? 'on' : ''}" data-a="tab" data-v="${t[0]}">${t[1]}${t[0] === 'wd' && S.wd.some(x => x.st === 'menunggu') ? ' •' : ''}</button>`).join('')}</div>` + ({ ringkas: aRing, impor: aImp, wd: aWd, user: aUsr }[tab])()
+        }
+        function aRing() {
+            const a = S.orders.filter(o => o.st !== 'batal'), tot = a.reduce((s, o) => s + o.k, 0), us = a.reduce((s, o) => s + o.share, 0);
+            return `<div class="card"><h2>Ringkasan</h2><div class="row"><div><span class="mu">Pengguna</span><b>${S.users.filter(u => u.role === 'user').length}</b></div><div><span class="mu">Pesanan</span><b>${a.length}</b></div><div><span class="mu">Komisi Shopee</span><b>${rp(tot)}</b></div><div><span class="mu">Cashback pengguna</span><b>${rp(us)}</b></div><div><span class="mu">Bagian Anda</span><b>${rp(tot - us)}</b></div></div></div>
+<div class="card"><h2>Pengaturan</h2><div class="two"><div><label for="pct">Cashback (% dari komisi)</label><input id="pct" inputmode="numeric" value="${S.cfg.pct}"></div><div><label for="min">Minimal tarik (Rp)</label><input id="min" inputmode="numeric" value="${S.cfg.min}"></div></div><label for="aff">Affiliate ID Shopee Anda</label><input id="aff" value="${esc(S.cfg.aff)}"><p class="mu">Persentase baru hanya berlaku untuk pesanan yang diimpor setelahnya.</p><button data-a="cfg">Simpan pengaturan</button></div>`
+        }
+        function aImp() { return `<div class="card"><h2>Impor laporan komisi</h2><p class="mu">Unduh laporan konversi dari dashboard Shopee Affiliate, lalu unggah atau tempel di sini. Kolom wajib: sub_id, order_id, komisi. Kolom status opsional.</p><label for="file">Berkas CSV</label><input id="file" type="file" accept=".csv,text/csv,text/plain"><label for="csv">Atau tempel isi CSV</label><textarea id="csv" spellcheck="false">${esc(window._csv || '')}</textarea><button data-a="imp">Impor pesanan</button> <button class="ghost" data-a="sample" style="margin-left:6px">Isi contoh</button></div>` }
+        function aWd() { const l = S.wd.slice().reverse(); return `<div class="card"><h2>Permintaan penarikan</h2>` + (l.length ? `<div class="tw"><table><tr><th>Pengguna</th><th>Jumlah</th><th>Tujuan</th><th>Status</th><th></th></tr>${l.map(x => `<tr><td>${esc(uname(x.uid))}</td><td>${rp(x.amt)}</td><td>${esc(x.dst)}</td><td>${bdg(x.st)}</td><td>${x.st === 'menunggu' ? `<button class="sm" data-a="pay" data-v="${x.id}">Sudah dibayar</button><button class="sm no" data-a="rej" data-v="${x.id}">Tolak</button>` : ''}</td></tr>`).join('')}</table></div><button class="ghost" style="margin-top:12px" data-a="exp">Unduh CSV yang menunggu</button><p class="mu">Transfer manual dulu, lalu tekan Sudah dibayar.</p>` : '<div class="empty">Belum ada permintaan.</div>') + `</div>` }
+        function aUsr() { const l = S.users.filter(u => u.role === 'user'); return `<div class="card"><h2>Pengguna</h2>` + (l.length ? `<div class="tw"><table><tr><th>Nama</th><th>Email</th><th>Sub ID</th><th>Dicek</th><th>Tersedia</th><th>Pending</th></tr>${l.map(u => { const s = stats(u); return `<tr><td>${esc(u.name)}</td><td>${esc(u.email)}</td><td>${esc(u.sub)}</td><td>${S.clicks.filter(c => c.user_id === u.id).length}</td><td>${rp(s.av)}</td><td>${rp(s.p)}</td></tr>` }).join('')}</table></div><p class="mu">Dicek: berapa kali pengguna menampilkan produk.</p>` : '<div class="empty">Belum ada pengguna terdaftar.</div>') + `</div>` }
+        function prodName(u) { const m = u.match(/shopee\.[a-z.]+\/(.+?)-i\.\d+\.\d+/i); if (m) { try { return decodeURIComponent(m[1]).replace(/-/g, ' ') } catch (e) { } } return 'Produk Shopee' }
+        function parseCSV(t) {
+            const L = t.trim().split(/\r?\n/).filter(Boolean); if (!L.length) return [];
+            const d = [',', ';', '\t'].sort((a, b) => L[0].split(b).length - L[0].split(a).length)[0];
+            return L.map(l => { const r = []; let c = '', q = false; for (const ch of l) { if (ch === '"') q = !q; else if (ch === d && !q) { r.push(c); c = '' } else c += ch } r.push(c); return r.map(x => x.trim()) })
+        }
+        function num(v) { let s = String(v || '').replace(/[^\d.,]/g, ''); if (/,\d{1,2}$/.test(s)) s = s.replace(/\./g, '').replace(',', '.'); else if (/\.\d{1,2}$/.test(s)) s = s.replace(/,/g, ''); else s = s.replace(/[.,]/g, ''); return parseFloat(s) }
+        function stOf(t) { t = String(t || '').toLowerCase(); if (/cancel|batal|invalid|tidak|reject/.test(t)) return 'batal'; if (/complet|selesai|cair|valid|paid|dibayar/.test(t)) return 'cair'; return 'pending' }
+
+
+        function rowsFrom(t) {
+            const R = parseCSV(t); if (R.length < 2) throw Error('CSV kosong atau tanpa baris data.');
+            const h = R[0].map(x => x.toLowerCase()), f = (re, ex) => h.findIndex(x => re.test(x) && !(ex && ex.test(x)));
+            const i = { s: f(/sub/), o: f(/order|pesanan/, /status|time|waktu|tanggal/), k: f(/komisi|commission/), t: f(/status/) };
+            if (i.s < 0 || i.o < 0 || i.k < 0) throw Error('Kolom wajib tidak ditemukan: sub_id, order_id, komisi.');
+            return R.slice(1).map(r => ({ oid: r[i.o], sub: r[i.s], k: num(r[i.k]), st: stOf(i.t >= 0 ? r[i.t] : '') })).filter(x => x.oid && x.sub && !isNaN(x.k))
+        }
+        document.addEventListener('change', e => { if (e.target.id === 'file' && e.target.files[0]) { const r = new FileReader(); r.onload = () => { window._csv = String(r.result); const t = $('#csv'); if (t) t.value = window._csv }; r.readAsText(e.target.files[0]) } });
+        document.addEventListener('click', async e => {
+            const b = e.target.closest('[data-a]'); if (!b || !ok) return; const a = b.dataset.a, v = b.dataset.v;
+            try {
+                if (a === 'am') { am = v }
+                else if (a === 'ut') { ut = v }
+                else if (a === 'tab') { tab = v }
+                else if (a === 'inst') { return inst() }
+                else if (a === 'login') { const r = await sb.auth.signInWithPassword({ email: val('em'), password: document.getElementById('pw').value }); if (r.error) throw r.error }
+                else if (a === 'daftar') { const pw = document.getElementById('pw').value; if (pw.length < 6) throw Error('Kata sandi minimal 6 karakter.'); const r = await sb.auth.signUp({ email: val('em'), password: pw, options: { data: { name: val('nm') } } }); if (r.error) throw r.error; if (!r.data.session) { msg = 'Pendaftaran berhasil. Cek email untuk konfirmasi, lalu masuk.'; am = 'login' } }
+                else if (a === 'out') { await sb.auth.signOut(); lastLink = ''; lastUrl = '' }
+                else if (a === 'gen') { const u = val('url'); lastUrl = u; if (!/^https?:\/\/(\S+\.)?(shopee\.|shp\.ee|s\.shopee)/i.test(u)) { msg = 'Masukkan link produk Shopee yang valid, misalnya https://shopee.co.id/...'; lastLink = '' } else { lastName = prodName(u); lastLink = `https://s.shopee.co.id/an_redir?origin_link=${encodeURIComponent(u)}&affiliate_id=${encodeURIComponent(S.cfg.aff || 'ISI_AFFILIATE_ID')}&sub_id=${S.prof.sub}`; if (!S.cfg.aff) msg = 'Affiliate ID belum diisi admin. Link ini hanya contoh.'; sb.from('clicks').insert({ user_id: S.prof.id, url: u }).then(() => { }) } }
+                else if (a === 'wd') { const amt = Math.round(num(val('amt'))), dst = val('dst'); if (!dst || isNaN(amt)) throw Error('Isi jumlah dan tujuan penarikan.'); const r = await sb.rpc('request_withdrawal', { p_amount: amt, p_dest: dst }); if (r.error) throw r.error; msg = 'Penarikan diajukan. Admin akan memprosesnya.' }
+                else if (a === 'cfg') { const p = num(val('pct')), m = num(val('min')); if (isNaN(p) || p < 0 || p > 100 || isNaN(m)) throw Error('Periksa isian: persen 0 sampai 100 dan minimal tarik berupa angka.'); const r = await sb.from('settings').update({ pct: p, min_wd: m, aff_id: val('aff') }).eq('id', 1); if (r.error) throw r.error; msg = 'Pengaturan disimpan.' }
+                else if (a === 'imp') { const t = val('csv'); if (!t) throw Error('Tempel atau unggah CSV dulu.'); const rows = rowsFrom(t); const r = await sb.rpc('import_orders', { rows }); if (r.error) throw r.error; msg = `Impor selesai: ${r.data.baru} pesanan baru, ${r.data.diperbarui} status diperbarui, dari ${rows.length} baris.`; window._csv = '' }
+                else if (a === 'sample') { const s = (S.users.find(u => u.role === 'user') || { sub: 'u12345' }).sub; window._csv = `sub_id,order_id,komisi,status\n${s},2611A001,15000,Completed\n${s},2611A002,8500,Pending\n${s},2611A003,12000,Cancelled` }
+                else if (a === 'pay' || a === 'rej') { const r = await sb.from('withdrawals').update({ status: a === 'pay' ? 'dibayar' : 'ditolak' }).eq('id', v); if (r.error) throw r.error }
+                else if (a === 'exp') { const q = x => '"' + String(x).replace(/"/g, '""') + '"'; const t = 'nama,tujuan,jumlah\n' + S.wd.filter(x => x.st === 'menunggu').map(x => [uname(x.uid), x.dst, x.amt].map(q).join(',')).join('\n'); const l = document.createElement('a'); l.href = URL.createObjectURL(new Blob([t], { type: 'text/csv' })); l.download = 'penarikan.csv'; l.click(); return }
+                if (ok && a !== 'am' && a !== 'ut' && a !== 'tab' && a !== 'gen' && a !== 'sample') await refresh()
+            } catch (err) { msg = err.message || String(err) }
+            render()
+        });
+        (async () => {
+            try { if (ok) { sb = window.supabase.createClient(SB_URL, SB_KEY); await refresh(); sb.auth.onAuthStateChange((ev) => { if (ev === 'SIGNED_IN' || ev === 'SIGNED_OUT') refresh().then(render).catch(() => { }) }) } } catch (e) { msg = e.message }
+            try { if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('sw.js').catch(() => { }) } catch (e) { }
+            render()
+        })();
+    </script>
+</body>
+
+</html>
